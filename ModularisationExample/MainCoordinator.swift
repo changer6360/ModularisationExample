@@ -13,15 +13,20 @@ import UIKit
 
 class MainCoordinator: Coordinator {
 
-    var navigationController: UINavigationController?
-
-    func goToHomeScreen() {
-        navigationController?.pushViewController(HomeViewController(coordinator: self), animated: true)
+    var navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 
-    func start() -> UIViewController {
-        self.navigationController = UINavigationController(rootViewController: LoginViewController(coordinator: self))
+    func goToHomeScreen() {
+        let homeVC = HomeViewController(coordinator: self)
+        navigationController.pushViewController(homeVC, animated: true)
+    }
 
-        return navigationController!
+    func start() {
+        let loginVC = LoginViewController(coordinator: self)
+        navigationController.pushViewController(loginVC, animated: false)
+        
     }
 }
